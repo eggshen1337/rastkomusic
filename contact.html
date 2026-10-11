@@ -9,6 +9,48 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+  .form { max-width: 40rem; }
+  .form label { display: block; margin-top: 1.6rem; font-weight: 600; }
+  .form label:first-of-type { margin-top: 0; }
+  .form input, .form textarea {
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.7rem 0.9rem;
+    background: #000;
+    border: 2px solid #EDEAE3;
+    border-radius: 0;
+    color: inherit;
+    font: inherit;
+  }
+  .form textarea { min-height: 10rem; resize: vertical; }
+  .form input:focus-visible, .form textarea:focus-visible {
+    outline: 3px solid #EDEAE3;
+    outline-offset: 3px;
+  }
+  .form input:-webkit-autofill {
+    -webkit-text-fill-color: #EDEAE3;
+    box-shadow: 0 0 0 100px #000 inset;
+  }
+  .form button {
+    margin-top: 2rem;
+    padding: 0.8rem 1.6rem;
+    background: #EDEAE3;
+    border: 0;
+    color: #000;
+    font: inherit;
+    font-weight: 700;
+    font-stretch: 125%;
+    cursor: pointer;
+  }
+  .form button:hover { background: #fff; }
+  .form button:focus-visible { outline: 3px solid #EDEAE3; outline-offset: 4px; }
+  .form button:disabled { opacity: 0.6; cursor: default; }
+  .form-status { margin: 1.2rem 0 0; min-height: 1.5em; }
+  .direct { margin: clamp(2.5rem, 6vw, 4rem) 0 0; }
+  .contact .imdb { margin-top: 2rem; }
+</style>
 </head>
 <body>
 <div class="page">
@@ -24,11 +66,61 @@
 
   <main class="contact">
     <h1 class="sr-only">Contact</h1>
-    <a class="email" href="mailto:ascendingideas@gmail.com">ascendingideas@gmail.com</a>
+
+    <form class="form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="bb0d8485-ad35-4e2c-b5bb-84ce07eaa65b">
+      <input type="hidden" name="subject" value="New message from rastkomusic.com">
+      <input type="checkbox" name="botcheck" style="display: none" tabindex="-1" autocomplete="off">
+
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" autocomplete="name" required>
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit" id="send">Send message</button>
+      <p class="form-status" id="status" role="status"></p>
+    </form>
+
+    
+
     <div>
       <a class="imdb" href="https://www.imdb.com/name/nm8775212/" target="_blank" rel="noopener" aria-label="Rastko Jović on IMDb">IMDb</a>
     </div>
   </main>
 </div>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const button = document.getElementById('send');
+  const statusLine = document.getElementById('status');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    button.disabled = true;
+    button.textContent = 'Sending…';
+    statusLine.textContent = '';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form)
+      });
+      const result = await response.json();
+      if (!result.success) throw new Error('not sent');
+      form.reset();
+      statusLine.textContent = 'Message sent. Thank you.';
+    } catch (error) {
+      statusLine.textContent = "Message couldn't be sent. Try again, or write to ascendingideas@gmail.com.";
+    }
+
+    button.disabled = false;
+    button.textContent = 'Send message';
+  });
+</script>
 </body>
 </html>
