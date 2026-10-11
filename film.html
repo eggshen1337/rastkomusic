@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Film work | Rastko Jović</title>
+<meta name="description" content="Scenes from films scored by Rastko Jović.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .clip { margin-top: clamp(2rem, 6vw, 4rem); }
+  .clip + .clip { margin-top: clamp(3.5rem, 9vw, 7rem); }
+  .clip video { display: block; width: 100%; height: auto; background: #111; }
+  .clip h2 {
+    margin: 1rem 0 0;
+    font-stretch: 125%;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .clip h2 a { text-decoration-thickness: 2px; text-underline-offset: 0.18em; }
+  .clip p { margin: 0.35rem 0 0; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <a class="name" href="index.html">Rastko Jović</a>
+    <nav aria-label="Main">
+      <a href="film.html" aria-current="page">Film work</a>
+      <a href="commercial.html">Commercial work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="sr-only">Film work</h1>
+
+    <article class="clip">
+      <video controls playsinline preload="metadata" src="videos/miasma-1.mp4#t=0.1"></video>
+      <h2><a href="https://www.imdb.com/title/tt31798469/" target="_blank" rel="noopener">Miasma</a></h2>
+      <p>2024, directed by Petar Tkalec</p>
+    </article>
+
+    <article class="clip">
+      <video controls playsinline preload="metadata" src="videos/besnilo-1.mp4#t=0.1"></video>
+      <h2><a href="https://www.imdb.com/title/tt15568776/" target="_blank" rel="noopener">Besnilo</a></h2>
+      <p>2021, directed by Petar Tkalec</p>
+    </article>
+
+    <article class="clip">
+      <video controls playsinline preload="metadata" src="videos/miasma-2.mp4#t=0.1"></video>
+      <h2><a href="https://www.imdb.com/title/tt31798469/" target="_blank" rel="noopener">Miasma</a></h2>
+      <p>2024, directed by Petar Tkalec</p>
+    </article>
+
+    <article class="clip">
+      <video controls playsinline preload="metadata" src="videos/besnilo-2.mp4#t=0.1"></video>
+      <h2><a href="https://www.imdb.com/title/tt15568776/" target="_blank" rel="noopener">Besnilo</a></h2>
+      <p>2021, directed by Petar Tkalec</p>
+    </article>
+
+    <article class="clip">
+      <video controls playsinline preload="metadata" src="videos/miasma-3.mp4#t=0.1"></video>
+      <h2><a href="https://www.imdb.com/title/tt31798469/" target="_blank" rel="noopener">Miasma</a></h2>
+      <p>2024, directed by Petar Tkalec</p>
+    </article>
+
+    <article class="clip">
+      <video controls playsinline preload="metadata" src="videos/besnilo-3.mp4#t=0.1"></video>
+      <h2><a href="https://www.imdb.com/title/tt15568776/" target="_blank" rel="noopener">Besnilo</a></h2>
+      <p>2021, directed by Petar Tkalec</p>
+    </article>
+
+    <article class="clip">
+      <video controls playsinline preload="metadata" src="videos/miasma-4.mp4#t=0.1"></video>
+      <h2><a href="https://www.imdb.com/title/tt31798469/" target="_blank" rel="noopener">Miasma</a></h2>
+      <p>2024, directed by Petar Tkalec</p>
+    </article>
+  </main>
+
+  <footer>
+    <a class="imdb" href="https://www.imdb.com/name/nm8775212/" target="_blank" rel="noopener" aria-label="Rastko Jović on IMDb">IMDb</a>
+  </footer>
+</div>
+
+<script>
+  const videos = document.querySelectorAll('video');
+  videos.forEach(v => v.addEventListener('play', () => {
+    videos.forEach(other => { if (other !== v) other.pause(); });
+  }));
+</script>
+</body>
+</html>

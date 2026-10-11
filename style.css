@@ -1,0 +1,221 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: #000;
+  color: #EDEAE3;
+  font-family: 'Archivo', Arial, sans-serif;
+  font-size: clamp(1.2rem, 1rem + 0.6vw, 1.4rem);
+  line-height: 1.5;
+}
+
+a { color: inherit; }
+
+a:focus-visible, video:focus-visible {
+  outline: 3px solid #EDEAE3;
+  outline-offset: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Navigation, shared by all pages */
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.75rem;
+}
+
+nav a { text-decoration: none; }
+
+nav a:hover,
+nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+
+/* Home */
+
+.home-wrap {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 4vw, 3rem) clamp(1.75rem, 4vw, 3rem);
+}
+
+.home-nav { justify-content: flex-end; }
+
+.hero-name {
+  margin: 0;
+  font-stretch: 125%;
+  font-weight: 700;
+  font-size: clamp(3.6rem, 15vw, 13rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  animation: name-in 1.8s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+}
+
+.tagline { margin: 1.2rem 0 0; }
+
+.late { animation: fade-in 1s ease 1.3s both; }
+
+@keyframes name-in {
+  from { opacity: 0; letter-spacing: 0.08em; }
+  to   { opacity: 1; letter-spacing: -0.02em; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-name, .late { animation: none; }
+}
+
+/* Inner pages */
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem 2rem;
+  padding: clamp(1.25rem, 3vw, 2rem) 0;
+}
+
+.top .name {
+  font-stretch: 125%;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+footer { padding: clamp(3rem, 8vw, 6rem) 0 2rem; }
+
+.imdb {
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  border-radius: 0.25em;
+  background: #F5C518;
+  color: #000;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* Film work */
+
+.film { margin-top: clamp(2rem, 6vw, 4rem); }
+
+.film + .film { margin-top: clamp(4rem, 10vw, 8rem); }
+
+.film h2 {
+  margin: 0;
+  font-stretch: 125%;
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+
+.film h2 a {
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.14em;
+}
+
+.film p { margin: 0.7rem 0 0; }
+
+.film video {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: clamp(1.5rem, 4vw, 3rem);
+  background: #111;
+}
+
+/* Commercial work */
+
+.works {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  margin-top: clamp(2rem, 6vw, 4rem);
+}
+
+.work {
+  flex: var(--r) 1 0;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.work img {
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--r);
+  object-fit: cover;
+  transition: opacity 0.2s;
+}
+
+.work:hover img { opacity: 0.85; }
+
+.work-title {
+  display: block;
+  margin-top: 0.8rem;
+  font-stretch: 125%;
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+.work-role { display: block; margin-top: 0.3rem; }
+
+@media (max-width: 700px) {
+  .works { flex-direction: column; }
+  .work { flex: none; width: 100%; }
+  .work.tall { width: 65%; }
+}
+
+/* About */
+
+.prose {
+  max-width: 36em;
+  margin-top: clamp(2rem, 6vw, 5rem);
+}
+
+.prose p { margin: 0 0 1.2em; }
+
+/* Contact */
+
+.contact { margin-top: clamp(3rem, 10vw, 8rem); }
+
+.email {
+  font-weight: 600;
+  font-size: clamp(1.3rem, 5vw, 4rem);
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.15em;
+}
+
+.contact .imdb {
+  margin-top: 2.5rem;
+  font-size: 1.5em;
